@@ -1,0 +1,8 @@
+.circleci
+coverage
+dist
+node_modules
+test
+.eslintignore
+.eslintrc.js
+.gitignore
