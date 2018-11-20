@@ -1,0 +1,42 @@
+@import '../assets/scss/_variables.scss';
+
+.menu {
+	background-color: $header_color;
+	height: 80px;
+
+	z-index: 999;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	overflow: auto;
+
+	&-container {
+        display: flex;
+        position: fixed;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-end;
+
+        padding: 24px;
+        box-sizing: border-box;
+    }
+
+    &-logo {
+        img {
+            height: 30px;
+        }
+    }
+
+    &-input {
+        flex-grow: 2;
+        input {
+            width: 300px;
+        }
+    }
+
+    &-item {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}

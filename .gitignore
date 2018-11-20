@@ -60,3 +60,5 @@ typings/
 
 # built files
 dist
+
+.DS_Store
