@@ -5,7 +5,6 @@ ARG WORKDIR=/frontend-website
 RUN mkdir -p ${WORKDIR}
 WORKDIR ${WORKDIR}
 
-COPY assets assets
 COPY build build
 COPY src src
 COPY static static
