@@ -1,14 +1,21 @@
-const handler = require('serve-handler');
+const express = require('express');
 const http = require('http');
- 
-const port = process.env.PORT || 3000;
+const path = require('path');
 
-const server = http.createServer((request, response) => {
-  return handler(request, response, {
-      public: 'dist'
-  });
-})
- 
+const app = express();
+// disable express default headers
+app.disable('x-powered-by');
+
+//static files
+app.use('/', express.static(path.join(__dirname, 'dist')));
+app.get('/website/healthcheck', (req, res) => res.json({ status: 'UP' }));
+
+const server = http.createServer(app);
+
+// set max connections
+server.maxConnections = 256;
+
+const port = 3000;
 server.listen(port, () => {
-  console.log(`info: Twitch website now listening on ${port}`);
+  console.log(`Twitch API now listening on ${port}`)
 });
