@@ -169,7 +169,7 @@ jobs:
       - run:
           name: Waiting for application
           command: |
-            dockerize -wait tcp://127.0.0.1:8080 -timeout 15s
+            dockerize -wait http://127.0.0.1:3000 -timeout 15s
       - run:
           name: Testing healthcheck
           command: |
