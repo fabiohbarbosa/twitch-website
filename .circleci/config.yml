@@ -160,10 +160,12 @@ jobs:
           command: |
             cd twitch-e2e-test
             npm i
+
       - run:
           name: Run e2e test
           command: |
             cd twitch-e2e-test
+            ls -la
             npm run cy:run:record
 
   deploy:
@@ -211,54 +213,65 @@ jobs:
           name: Healthcheck
           command: curl -I ${ENV_URL}${HEALTHCHECK} --fail
 
+# workflows:
+#   version: 2
+#   build_and_deploy:
+#     jobs:
+#       - install:
+#           context: twitch-envs
+
+#       - test:
+#           context: twitch-envs
+#           requires:
+#             - install
+#       - lint:
+#           context: twitch-envs
+#           requires:
+#             - install
+
+#       - patch_version:
+#           context: twitch-envs
+#           requires:
+#             - test
+#             - lint
+#           filters:
+#             <<: *only_master
+
+#       - build:
+#           context: twitch-envs
+#           requires:
+#             - patch_version
+#           filters:
+#             <<: *only_master
+
+#       - deploy:
+#           context: twitch-envs
+#           requires:
+#             - build
+#           filters:
+#             <<: *only_master
+
+#       - healthcheck:
+#           context: twitch-envs
+#           requires:
+#             - deploy
+#           filters:
+#             <<: *only_master
+
+#       - test_e2e:
+#           context: twitch-envs
+#           requires:
+#             - healthcheck
+#           filters:
+#             <<: *only_master
+
+
+
 workflows:
   version: 2
   build_and_deploy:
     jobs:
-      - install:
-          context: twitch-envs
-
-      - test:
-          context: twitch-envs
-          requires:
-            - install
-      - lint:
-          context: twitch-envs
-          requires:
-            - install
-
-      - patch_version:
-          context: twitch-envs
-          requires:
-            - test
-            - lint
-          filters:
-            <<: *only_master
-
-      - build:
-          context: twitch-envs
-          requires:
-            - patch_version
-          filters:
-            <<: *only_master
-
-      - deploy:
-          context: twitch-envs
-          requires:
-            - build
-          filters:
-            <<: *only_master
-
-      - healthcheck:
-          context: twitch-envs
-          requires:
-            - deploy
-          filters:
-            <<: *only_master
-
       - test_e2e:
           context: twitch-envs
-          requires:
-            - healthcheck
           filters:
             <<: *only_master
