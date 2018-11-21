@@ -1,6 +1,6 @@
 {
   "name": "twitch-website",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Twitch Website",
   "main": "index.js",
   "scripts": {
