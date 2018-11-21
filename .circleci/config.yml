@@ -103,7 +103,10 @@ jobs:
             git pull circleci master
             git push circleci master --tags
             node -p -e 'require(`./package.json`).version' > VERSION
-      - <<: *persist_to_workspace
+
+      persist_to_workspace:
+        root: ~/repo
+        paths: VERSION
 
   build:
     <<: *working_directory
@@ -162,7 +165,6 @@ jobs:
           command: |
             wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
             tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
-            chmod +x dockerize
 
       - run:
           name: Waiting for application
