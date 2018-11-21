@@ -53,6 +53,7 @@ export default {
   methods: {
     search (event) {
       if (!this.text || this.text.length === 0) return;
+      this.cleanStreams();
       const textToFilter = this.text.trim().toLowerCase();
 
       // TODO study whether possible use mapGetters
@@ -64,7 +65,6 @@ export default {
 
       if (event.keyCode === 27) {
         this.cleanGames();
-        this.cleanStreams();
       }
     },
 
@@ -76,6 +76,7 @@ export default {
     selectStream (stream) {
       this.$store.dispatch('streams/setStream', stream);
       this.cleanStreams();
+      this.text = '';
     },
 
     cleanGames () {
@@ -85,7 +86,6 @@ export default {
     cleanStreams () {
       this.$store.dispatch('streams/unsetStreams');
       this.showStream = false;
-      this.text = '';
     }
 
   }
