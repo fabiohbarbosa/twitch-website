@@ -1,10 +1,7 @@
-import axios from 'axios';
 import Vue from 'vue';
 import Vuex from 'vuex';
-import VueAxios from 'vue-axios';
 
 Vue.use(Vuex);
-Vue.use(VueAxios, axios);
 
 // initial state
 const state = {

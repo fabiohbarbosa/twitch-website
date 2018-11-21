@@ -68,8 +68,9 @@ export default {
       }
     },
 
-    selectGame (gameName) {
-      this.$store.dispatch('streams/getByGame', gameName);
+    selectGame (game) {
+      const limit = localStorage.getItem('iSearchLimit') || 5;
+      this.$store.dispatch('streams/getByGame', { game, limit });
       this.cleanGames();
     },
 

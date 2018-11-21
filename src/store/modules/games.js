@@ -1,7 +1,7 @@
-import axios from 'axios';
 import Vue from 'vue';
 import Vuex from 'vuex';
 import VueAxios from 'vue-axios';
+import axios from '../../utils/http';
 
 Vue.use(Vuex);
 Vue.use(VueAxios, axios);
@@ -19,7 +19,7 @@ export default {
   actions: {
     getAll ({ commit }) {
       axios
-        .get(`/api/game`)
+        .get(`/game`)
         .then(r => r.data)
         .then(games => {
           commit('setGames', games);

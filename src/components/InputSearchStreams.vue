@@ -4,8 +4,13 @@
       <div class="dropdown-content-title-item">
         {{ game }}
       </div>
+
       <div class="dropdown-content-title-item">
-        LIVE
+        <select v-on:change="updateSearch" v-model="iSearchLimit">
+          <option v-for="i in incrementalSearch" :key="i">
+            {{i}}
+          </option>
+        </select>
       </div>
     </div>
 
@@ -28,6 +33,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import './InputSearchStreams.scss';
 
 export default {
@@ -43,6 +49,36 @@ export default {
     selectStream: {
       type: Function,
       required: true
+    }
+  },
+  data() {
+    return {
+      iSearchLimit: 5,
+      incrementalSearch: [
+        5, 15, 30, 50, 75, 100
+      ]
+    }
+  },
+
+  computed: {
+    ...mapState({
+      games: state => state.games.all
+    })
+  },
+
+  mounted () {
+    const limit = localStorage.getItem('iSearchLimit');
+    if (limit) {
+      this.iSearchLimit = limit;
+    }
+  },
+
+  methods: {
+    updateSearch () {
+      localStorage.setItem('iSearchLimit', this.iSearchLimit);
+      this.$store.dispatch('streams/getByGame', {
+        game: this.game, limit: this.iSearchLimit
+      });
     }
   }
 };

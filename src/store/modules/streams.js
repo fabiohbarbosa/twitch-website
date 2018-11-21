@@ -1,7 +1,7 @@
-import axios from 'axios';
 import Vue from 'vue';
 import Vuex from 'vuex';
 import VueAxios from 'vue-axios';
+import axios from '../../utils/http';
 
 Vue.use(Vuex);
 Vue.use(VueAxios, axios);
@@ -26,7 +26,7 @@ export default {
 
     getByChannelName ({ commit }, channel) {
       axios
-        .get(`/api/streams/${channel}`)
+        .get(`/streams/${channel}`)
         .then(r => r.data)
         .then(stream => {
           commit('setStream', stream);
@@ -39,10 +39,12 @@ export default {
         });
     },
 
-    getByGame ({ commit }, game) {
+    getByGame ({ commit }, args) {
+      const { game, limit } = args;
       commit('setStreamGame', game);
+
       axios
-        .get(`/api/streams?game=${game}`)
+        .get(`/streams?game=${game}&limit=${limit}`)
         .then(r => r.data)
         .then(streams => {
           commit('setStreams', streams.data);
