@@ -158,10 +158,12 @@ jobs:
       - run:
           name: Install dependencies
           command: |
+            cd twitch-e2e-test
             npm i
       - run:
           name: Run e2e test
           command: |
+            cd twitch-e2e-test
             npm run cy:run:record
 
   deploy:
