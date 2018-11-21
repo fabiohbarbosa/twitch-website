@@ -104,9 +104,9 @@ jobs:
             git push circleci master --tags
             node -p -e 'require(`./package.json`).version' > VERSION
 
-      persist_to_workspace:
-        root: ~/repo
-        paths: VERSION
+      - persist_to_workspace:
+          root: ~/repo
+          paths: VERSION
 
   build:
     <<: *working_directory
