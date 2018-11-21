@@ -146,7 +146,7 @@ jobs:
 
   test_e2e:
     docker:
-      - image: node:11.1.0
+      - image: cypress/browsers:chrome69
 
     steps:
       - run:
@@ -156,7 +156,7 @@ jobs:
             cd twitch-e2e-test
 
       - run:
-          name: Install dependencies
+          name: Install project dependencies
           command: |
             cd twitch-e2e-test
             npm i
