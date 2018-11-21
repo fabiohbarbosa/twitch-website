@@ -1,48 +1,43 @@
 <template>
   <div>
     <div class="dropdown">
-      <input
-        v-model="text"
-        class="field"
-        type="text"
-        placeholder="Search Game"
-        @keyup="search"
-        @click="search"
-        @keydown="changeFocus">
-      <div
-        :ref="&quot;dropdown&quot;"
-        :class="{ show: show && gamesFound.length > 0 }"
-        class="dropdown-content">
-        <a
-          v-for="(game, index) in gamesFound"
-          :key="index"
-          href="#"
-          tabindex="1"
-          @click="selectGame(game.name)">
-          {{ game.name }}
-        </a>
-      </div>
+      <input v-model="text" class="field" type="text" placeholder="Search Game"
+             @keyup="search" @click="search">
+
+      <input-search-games :games="gamesFound" :select-game="selectGame" />
+      <input-search-streams v-if="showStream" :game="streamGame" :streams="streamsFound" :select-stream="selectStream"/>
+
     </div>
 
   </div>
 </template>
 
 <script>
-import './InputSearch.scss';
 import { mapState } from 'vuex';
+import InputSearchGames from './InputSearchGames';
+import InputSearchStreams from './InputSearchStreams';
+
+import './InputSearch.scss';
 
 export default {
+  components: {
+    InputSearchGames,
+    InputSearchStreams
+  },
+
   data () {
     return {
       text: '',
       gamesFound: [],
-      show: false
+      showStream: true
     };
   },
 
   computed: {
     ...mapState({
-      games: state => state.games.all
+      games: state => state.games.all,
+      streamGame: state => state.streams.game,
+      streamsFound: state => state.streams.all
     })
   },
 
@@ -66,25 +61,32 @@ export default {
           .toLowerCase()
           .includes(textToFilter);
       });
-      this.show = true;
 
       if (event.keyCode === 27) {
-        this.show = false;
-        this.gamesFound = [];
-      }
-    },
-
-    changeFocus (event) {
-      if (event.keyCode === 40) {
-        this.$nextTick(() => {
-          // TODO change focus to list to navigate with arrows
-        });
+        this.cleanGames();
       }
     },
 
     selectGame (gameName) {
       this.$store.dispatch('streams/getByGame', gameName);
+      this.cleanGames();
+    },
+
+    selectStream (stream) {
+      this.cleanStream();
+      this.$store.dispatch('streams/setStream', stream);
+      this.cleanStream();
+    },
+
+    cleanGames () {
+      this.gamesFound = [];
+    },
+
+    cleanStream () {
+      this.$store.dispatch('streams/unsetStreams');
+      this.showStream = false;
     }
+
   }
 };
 </script>

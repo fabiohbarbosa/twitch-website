@@ -1,3 +1,4 @@
+@import '../assets/scss/_mixins.scss';
 @import '../assets/scss/_variables.scss';
 
 .menu {
@@ -17,7 +18,6 @@
         flex-direction: row;
         justify-content: flex-start;
         align-items: flex-end;
-
         padding: 7px 6px;
         box-sizing: border-box;
     }
@@ -38,5 +38,20 @@
     &-item {
         padding-left: 16px;
         padding-right: 16px;
+    }
+}
+
+@include mobile {
+    .menu {
+        &-container {
+            align-items: center;
+            justify-content: center;
+        }
+        &-logo {
+            display: none;
+        }
+        &-input {
+            flex-grow: 0;
+        }
     }
 }

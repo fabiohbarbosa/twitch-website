@@ -8,7 +8,9 @@ Vue.use(VueAxios, axios);
 
 // initial state
 const state = {
-  all: []
+  all: [],
+  stream: { 'name': 'Fabio' },
+  game: ''
 };
 
 export default {
@@ -16,18 +18,41 @@ export default {
   state,
   getters: {},
   actions: {
+    unsetStreams ({ commit, dispatch }, stream) {
+      commit('unsetStreams');
+    },
     getByGame ({ commit }, game) {
+      commit('setStreamGame', game);
       axios
         .get(`/api/streams?game=${game}`)
         .then(r => r.data)
         .then(streams => {
-          commit('setStreams', streams);
+          commit('setStreams', streams.data);
+        }).catch(err => {
+          if (err.response && err.response.status === 400) {
+            commit('setStreams', []);
+            return;
+          }
+          throw err;
         });
+    },
+    setStream ({ commit }, stream) {
+      commit('setStream', stream);
     }
   },
   mutations: {
+    setStreamGame (state, game) {
+      state.game = game;
+    },
+    setStream (state, stream) {
+      stream.url = `https://player.twitch.tv/?channel=${stream.channel}`;
+      state.stream = stream;
+    },
     setStreams (state, streams) {
       state.all = streams;
+    },
+    unsetStreams (state) {
+      state.all = [];
     }
   }
 };
