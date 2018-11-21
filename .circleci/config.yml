@@ -63,9 +63,9 @@ jobs:
           name: Run tests
           command: npm test
 
-      - run:
-          name: Send coverage reports to coveralls
-          command: npm run coverage
+      # - run:
+      #     name: Send coverage reports to coveralls
+      #     command: npm run coverage
 
   lint:
     <<: *working_directory

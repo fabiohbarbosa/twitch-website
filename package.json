@@ -9,7 +9,7 @@
     "build": "webpack --config build/webpack.config.prod.js",
     "lint": "eslint --ext .js,.vue src",
     "lint:fix": "eslint --ext .js,.vue src --fix",
-    "test": "exit 0",
+    "test": "jest",
     "coverage": "cat coverage/lcov.info | coveralls",
     "version": "VERSION=$(node -p -e 'require(`./package.json`).version') && git tag $VERSION && git push --tags"
   },
