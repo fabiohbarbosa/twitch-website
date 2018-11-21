@@ -146,7 +146,6 @@ jobs:
             echo "gcr.io/$GCP_PROJECT/$GROUP/$SERVICENAME:e2e"
             docker tag gcr.io/$GCP_PROJECT/$GROUP/$SERVICENAME:$VERSION gcr.io/$GCP_PROJECT/$GROUP/$SERVICENAME:e2e
             docker push gcr.io/$GCP_PROJECT/$GROUP/$SERVICENAME:e2e
-
       - <<: *persist_to_workspace
 
   test_e2e:
