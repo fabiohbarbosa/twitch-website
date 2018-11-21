@@ -144,30 +144,6 @@ jobs:
             docker push gcr.io/$GCP_PROJECT/$GROUP/$SERVICENAME:e2e
       - <<: *persist_to_workspace
 
-  test_e2e:
-    docker:
-      - image: cypress/browsers:chrome69
-    environment:
-      PROJECT_DIR: twitch-e2e-test
-    steps:
-      - run:
-          name: Clone twitch-e2e-test
-          command: |
-            git clone https://fabiohbarbosa:${GITHUB_TOKEN}@github.com/fabiohbarbosa/twitch-e2e-test.git
-            cd ${PROJECT_DIR}
-
-      - run:
-          name: Install project dependencies
-          command: |
-            cd ${PROJECT_DIR}
-            npm i
-
-      - run:
-          name: Run e2e test
-          command: |
-            cd ${PROJECT_DIR}
-            npm run cy:run:record
-
   deploy:
     <<: *working_directory
     docker:
@@ -213,65 +189,78 @@ jobs:
           name: Healthcheck
           command: curl -I ${ENV_URL}${HEALTHCHECK} --fail
 
-# workflows:
-#   version: 2
-#   build_and_deploy:
-#     jobs:
-#       - install:
-#           context: twitch-envs
+  test_e2e:
+    docker:
+      - image: cypress/browsers:chrome69
+    environment:
+      PROJECT_DIR: twitch-e2e-test
+    steps:
+      - run:
+          name: Clone twitch-e2e-test
+          command: |
+            git clone https://fabiohbarbosa:${GITHUB_TOKEN}@github.com/fabiohbarbosa/twitch-e2e-test.git
+            cd ${PROJECT_DIR}
 
-#       - test:
-#           context: twitch-envs
-#           requires:
-#             - install
-#       - lint:
-#           context: twitch-envs
-#           requires:
-#             - install
+      - run:
+          name: Install project dependencies
+          command: |
+            cd ${PROJECT_DIR}
+            npm i
 
-#       - patch_version:
-#           context: twitch-envs
-#           requires:
-#             - test
-#             - lint
-#           filters:
-#             <<: *only_master
-
-#       - build:
-#           context: twitch-envs
-#           requires:
-#             - patch_version
-#           filters:
-#             <<: *only_master
-
-#       - deploy:
-#           context: twitch-envs
-#           requires:
-#             - build
-#           filters:
-#             <<: *only_master
-
-#       - healthcheck:
-#           context: twitch-envs
-#           requires:
-#             - deploy
-#           filters:
-#             <<: *only_master
-
-#       - test_e2e:
-#           context: twitch-envs
-#           requires:
-#             - healthcheck
-#           filters:
-#             <<: *only_master
-
-
+      - run:
+          name: Run e2e test
+          command: |
+            cd ${PROJECT_DIR}
+            npm run cy:run:record
 
 workflows:
   version: 2
   build_and_deploy:
     jobs:
+      - install:
+          context: twitch-envs
+
+      - test:
+          context: twitch-envs
+          requires:
+            - install
+      - lint:
+          context: twitch-envs
+          requires:
+            - install
+
+      - patch_version:
+          context: twitch-envs
+          requires:
+            - test
+            - lint
+          filters:
+            <<: *only_master
+
+      - build:
+          context: twitch-envs
+          requires:
+            - patch_version
+          filters:
+            <<: *only_master
+
+      - deploy:
+          context: twitch-envs
+          requires:
+            - build
+          filters:
+            <<: *only_master
+
+      - healthcheck:
+          context: twitch-envs
+          requires:
+            - deploy
+          filters:
+            <<: *only_master
+
       - test_e2e:
           context: twitch-envs
+          requires:
+            - healthcheck
           filters:
             <<: *only_master
