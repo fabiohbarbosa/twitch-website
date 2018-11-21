@@ -57,7 +57,7 @@ export default {
 
   methods: {
     search (event) {
-      if (this.text.length < 3) return;
+      if (!this.text || this.text.length === 0) return;
       const textToFilter = this.text.trim().toLowerCase();
 
       // TODO study whether possible use mapGetters
