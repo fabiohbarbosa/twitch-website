@@ -23,7 +23,7 @@ export default {
         .then(r => r.data)
         .then(games => {
           commit('setGames', games);
-          commit('fetchCount')
+          commit('fetchCount');
         });
     }
   },
@@ -35,4 +35,4 @@ export default {
       state.fetchCount += 1;
     }
   }
-}
+};

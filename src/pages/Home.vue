@@ -12,6 +12,6 @@ export default {
     return {
       message: 'Underconstruction...'
     };
-  },
+  }
 };
 </script>

@@ -13,7 +13,8 @@ const debug = process.env.NODE_ENV !== 'production';
 export default new Vuex.Store({
   modules: {
     games,
-    search
+    search,
+    streams
   },
   strict: debug,
   plugins: debug ? [createLogger()] : []

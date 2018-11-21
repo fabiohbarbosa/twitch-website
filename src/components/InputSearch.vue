@@ -1,13 +1,27 @@
 <template>
   <div>
     <div class="dropdown">
-      <input class="field" type="text" placeholder="Search Game"
-             v-model="text" @keyup="search" @click="search" @keydown="changeFocus"/>
-        <div :ref='"dropdown"' class="dropdown-content" v-bind:class="{ show: show && gamesFound.length > 0 }">
-          <a href="#" v-for="(game, index) in gamesFound" v-bind:key="index" @click="selectGame(game.name)" tabindex="1">
-            {{ game.name }}
-          </a>
-        </div>
+      <input
+        v-model="text"
+        class="field"
+        type="text"
+        placeholder="Search Game"
+        @keyup="search"
+        @click="search"
+        @keydown="changeFocus">
+      <div
+        :ref="&quot;dropdown&quot;"
+        :class="{ show: show && gamesFound.length > 0 }"
+        class="dropdown-content">
+        <a
+          v-for="(game, index) in gamesFound"
+          :key="index"
+          href="#"
+          tabindex="1"
+          @click="selectGame(game.name)">
+          {{ game.name }}
+        </a>
+      </div>
     </div>
 
   </div>
@@ -15,7 +29,7 @@
 
 <script>
 import './InputSearch.scss';
-import { mapGetters, mapState } from 'vuex'
+import { mapState } from 'vuex';
 
 export default {
   data () {
@@ -24,6 +38,12 @@ export default {
       gamesFound: [],
       show: false
     };
+  },
+
+  computed: {
+    ...mapState({
+      games: state => state.games.all
+    })
   },
 
   mounted () {
@@ -35,12 +55,6 @@ export default {
     }, 300000);
   },
 
-  computed: {
-    ...mapState({
-      games: state => state.games.all
-    })
-  },
-
   methods: {
     search (event) {
       if (this.text.length < 3) return;
@@ -49,26 +63,26 @@ export default {
       // TODO study whether possible use mapGetters
       this.gamesFound = this.games.filter(g => {
         return g.name.trim()
-                .toLowerCase()
-                .includes(textToFilter)
+          .toLowerCase()
+          .includes(textToFilter);
       });
       this.show = true;
 
-      if (event.keyCode == 27) {
+      if (event.keyCode === 27) {
         this.show = false;
         this.gamesFound = [];
       }
     },
 
-    changeFocus(event) {
-      if(event.keyCode === 40) {
+    changeFocus (event) {
+      if (event.keyCode === 40) {
         this.$nextTick(() => {
           // TODO change focus to list to navigate with arrows
         });
       }
     },
 
-    selectGame(gameName) {
+    selectGame (gameName) {
       this.$store.dispatch('streams/getByGame', gameName);
     }
   }

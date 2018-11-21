@@ -25,4 +25,4 @@ export default {
       state.gamesToSearch = gamesToSearch;
     }
   }
-}
+};
