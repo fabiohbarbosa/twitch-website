@@ -1,4 +1,30 @@
 .content {
     margin-top: 80px;
-    display: flex;
+
+    .channel {
+        display: flex;
+
+        &-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-left: 5px;
+            padding: 10px;
+        }
+
+        &-item {
+            img {
+                height: 80px;
+            }
+            h1 {
+                margin: 0;
+                font-size: 16px;
+                line-height: 24px;
+            }
+            p {
+                font-size: 12px;
+                margin: 0;
+            }
+        }
+    }
 }

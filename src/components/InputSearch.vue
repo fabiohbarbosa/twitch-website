@@ -5,7 +5,7 @@
              @keyup="search" @click="search">
 
       <input-search-games :games="gamesFound" :select-game="selectGame" />
-      <input-search-streams v-if="showStream" :game="streamGame" :streams="streamsFound" :select-stream="selectStream"/>
+      <input-search-streams :game="streamGame" :streams="streamsFound" :select-stream="selectStream"/>
 
     </div>
 
@@ -64,6 +64,7 @@ export default {
 
       if (event.keyCode === 27) {
         this.cleanGames();
+        this.cleanStreams();
       }
     },
 
@@ -73,18 +74,18 @@ export default {
     },
 
     selectStream (stream) {
-      this.cleanStream();
       this.$store.dispatch('streams/setStream', stream);
-      this.cleanStream();
+      this.cleanStreams();
     },
 
     cleanGames () {
       this.gamesFound = [];
     },
 
-    cleanStream () {
+    cleanStreams () {
       this.$store.dispatch('streams/unsetStreams');
       this.showStream = false;
+      this.text = '';
     }
 
   }

@@ -9,7 +9,7 @@ Vue.use(VueAxios, axios);
 // initial state
 const state = {
   all: [],
-  stream: { 'name': 'Fabio' },
+  stream: {},
   game: ''
 };
 
