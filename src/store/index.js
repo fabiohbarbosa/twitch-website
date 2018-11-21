@@ -5,6 +5,7 @@ import createLogger from 'vuex/dist/logger';
 import games from './modules/games';
 import search from './modules/search';
 import streams from './modules/streams';
+import loading from './modules/loading';
 
 Vue.use(Vuex);
 
@@ -14,7 +15,8 @@ export default new Vuex.Store({
   modules: {
     games,
     search,
-    streams
+    streams,
+    loading
   },
   strict: debug,
   plugins: debug ? [createLogger()] : []

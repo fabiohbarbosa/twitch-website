@@ -1,17 +1,18 @@
 import axios from 'axios';
+import store from '../store';
 
 const httpClient = axios.create({
   baseURL: '/api'
 });
 
 httpClient.interceptors.request.use(config => {
-  console.log('START Loading');
+  store.dispatch('loading/toggle');
   return config;
 });
 
-// before a response is returned stop nprogress
+// before a response it stop loading
 httpClient.interceptors.response.use(response => {
-  console.log('DONE!');
+  store.dispatch('loading/toggle');
   return response;
 });
 

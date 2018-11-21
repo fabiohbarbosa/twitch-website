@@ -3,15 +3,12 @@
 
     .channel {
         display: flex;
-
         &-info {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
             margin-left: 5px;
             padding: 10px;
         }
-
         &-item {
             img {
                 height: 80px;

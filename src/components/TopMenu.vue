@@ -7,6 +7,11 @@
       <div class="menu-item menu-input">
         <input-search />
       </div>
+
+      <div class="menu-item menu-loading">
+        <loading />
+      </div>
+
     </div>
   </header>
 </template>
@@ -14,10 +19,12 @@
 <script>
 import './TopMenu.scss';
 import InputSearch from './InputSearch';
+import Loading from './Loading';
 
 export default {
   components: {
-    InputSearch
+    InputSearch,
+    Loading
   }
 };
 </script>

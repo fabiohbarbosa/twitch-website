@@ -5,8 +5,10 @@
 	background-color: $header_color;
 	height: 55px;
 
+    width: inherit;
+    position: fixed;
 	z-index: 999;
-	position: fixed;
+
 	top: 0;
 	left: 0;
 	right: 0;
@@ -21,7 +23,8 @@
         box-sizing: border-box;
     }
 
-    &-logo {
+    &-logo,
+    &-loading {
         img {
             height: 30px;
         }
@@ -37,20 +40,35 @@
     &-item {
         padding-left: 16px;
         padding-right: 16px;
+
+        &:last-child {
+            padding-left: 0;
+        }
     }
 }
 
 @include mobile {
     .menu {
+
         &-container {
-            align-items: center;
-            justify-content: center;
+            justify-content: space-around;
         }
+
         &-logo {
             display: none;
         }
+
         &-input {
             flex-grow: 0;
+        }
+
+        &-item {
+            padding-left: 0;
+            padding-right: 0;
+
+            &:last-child {
+                padding-left: 16px;
+            }
         }
     }
 }
