@@ -8,7 +8,7 @@
 
 import { mapState } from 'vuex';
 export default {
-  data() {
+  data () {
     return {
       toggleLoading: false
     };
@@ -16,7 +16,7 @@ export default {
 
   computed: {
     ...mapState({
-      showLoading: state => state.loading.show,
+      showLoading: state => state.loading.show
     })
   }
 

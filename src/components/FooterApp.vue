@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <p>Powered By Vue.js / Node.js / Kubernetes </p>
+    <p>Powered By Vue.js / Node.js / CircleCI / Kubernetes </p>
   </div>
 </template>
 

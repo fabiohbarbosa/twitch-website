@@ -60,6 +60,9 @@
 
         &-input {
             flex-grow: 0;
+            input {
+                width: 260px;
+            }
         }
 
         &-item {

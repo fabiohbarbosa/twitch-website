@@ -1,8 +1,19 @@
+@import '../assets/scss/_mixins.scss';
+@import '../assets/scss/_variables.scss';
+
+.iframe-container {
+    iframe {
+        height: 378px;
+        width: 620px;
+    }
+}
+
 .content {
     margin-top: 80px;
 
     .channel {
         display: flex;
+
         &-info {
             display: flex;
             flex-direction: column;
@@ -22,6 +33,15 @@
                 font-size: 12px;
                 margin: 0;
             }
+        }
+    }
+}
+
+@include mobile {
+    .iframe-container {
+        iframe {
+            height: 189px;
+            width: 334px;
         }
     }
 }

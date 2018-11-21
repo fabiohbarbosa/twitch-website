@@ -2,15 +2,13 @@
   <section>
     <div v-if="stream" class="content">
 
-
       <div class="iframe-container">
         <iframe
           :src="stream.url"
           frameborder="0"
           allowfullscreen="true"
           scrolling="no"
-          height="378" width="620"
-          />
+        />
       </div>
 
       <div v-if="stream.channel" class="channel">
