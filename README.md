@@ -5,6 +5,7 @@ Twitch Website
 - [CI/CD](https://circleci.com/gh/fabiohbarbosa/twitch-website)
 - [Coveralls](https://coveralls.io/github/fabiohbarbosa/twitch-website?branch=master)
 - [Kubernetes Healthcheck](http://35.244.227.171/website/healthcheck)
+- [Demo URL](http://35.244.227.171)
 
 ## NVM
 Change your node version to a project current node version.
