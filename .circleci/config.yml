@@ -172,7 +172,7 @@ jobs:
       - run:
           name: Testing healthcheck
           command: |
-            curl -I http://localhost:8080/website/healthcheck --fail
+            curl -I http://localhost:3000/website/healthcheck --fail
 
   deploy:
     <<: *working_directory
