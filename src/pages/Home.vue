@@ -2,7 +2,7 @@
   <section>
     <div v-if="stream" class="content">
 
-      <div class="iframe-container" id="iframeContainer">
+      <div id="iframeContainer" class="iframe-container">
         <iframe
           :src="stream.url"
           frameborder="0"
