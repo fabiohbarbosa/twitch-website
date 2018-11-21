@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ show: streams.length > 0 }" class="dropdown-content">
+  <div id="dropdownStreamsList" :class="{ show: streams.length > 0 }" class="dropdown-content">
     <div class="dropdown-content-title">
       <div class="dropdown-content-title-item">
         {{ game }}

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="dropdown">
-      <input v-model="text" class="field" type="text" placeholder="Search Game"
+      <input id="inputSearch" v-model="text" class="field" type="text" placeholder="Search Game"
              @keyup="search" @click="search">
 
       <input-search-games :games="gamesFound" :select-game="selectGame" />

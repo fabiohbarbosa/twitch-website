@@ -34,6 +34,8 @@ Change your node version to a project current node version.
 
 **CI/CD Variables**
 
+- CYPRESS_BASE_URL: Cypress base URL that has the production host address
+- CYPRESS_RECORD_KEY: Cypress record key to store test reports into the [dashboard](https://dashboard.cypress.io/#/projects/3zzwmr/)
 - ENV_URL: Kubernetes URL to be used in *healthcheck job*.
 - GITHUB_TOKEN: Github user token to push tags and relese files.
 - GOOGLE_AUTH: Google Cloud service account to deploy service in the Kubernetes.

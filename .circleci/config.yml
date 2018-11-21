@@ -63,10 +63,6 @@ jobs:
           name: Run tests
           command: npm test
 
-      # - run:
-      #     name: Send coverage reports to coveralls
-      #     command: npm run coverage
-
   lint:
     <<: *working_directory
     <<: *default_image
@@ -151,28 +147,22 @@ jobs:
   test_e2e:
     docker:
       - image: node:11.1.0
-      - image: gcr.io/twitch-223000/frontend/website:e2e
-        auth:
-          username: _json_key
-          password: $GOOGLE_AUTH
 
     steps:
       - run:
-          name: Install dockernize
-          environment:
-            DOCKERIZE_VERSION: v0.6.1
+          name: Clone twitch-e2e-test
           command: |
-            wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
-            tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+            git clone https://fabiohbarbosa:${GITHUB_TOKEN}@github.com/fabiohbarbosa/twitch-e2e-test.git
+            cd twitch-e2e-test
 
       - run:
-          name: Waiting for application
+          name: Install dependencies
           command: |
-            dockerize -wait http://127.0.0.1:3000 -timeout 15s
+            npm i
       - run:
-          name: Testing healthcheck
+          name: Run e2e test
           command: |
-            curl -I http://localhost:3000/website/healthcheck --fail
+            npm run cy:run:record
 
   deploy:
     <<: *working_directory
@@ -250,17 +240,10 @@ workflows:
           filters:
             <<: *only_master
 
-      - test_e2e:
-          context: twitch-envs
-          requires:
-            - build
-          filters:
-            <<: *only_master
-
       - deploy:
           context: twitch-envs
           requires:
-            - test_e2e
+            - build
           filters:
             <<: *only_master
 
@@ -268,5 +251,12 @@ workflows:
           context: twitch-envs
           requires:
             - deploy
+          filters:
+            <<: *only_master
+
+      - test_e2e:
+          context: twitch-envs
+          requires:
+            - healthcheck
           filters:
             <<: *only_master

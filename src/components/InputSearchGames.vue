@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ show: games.length > 0 }" class="dropdown-content">
+  <div id="dropdownGamesList" :class="{ show: games.length > 0 }" class="dropdown-content">
     <a v-for="(game, index) in games" :key="index"
        href="#" tabindex="1"
        @click="selectGame(game.name)">
