@@ -16,8 +16,8 @@
           <img :src="stream.preview">
         </div>
         <div class="dropdown-content-stream-container-item">
-          <h1>{{ stream.channel }}</h1>
-          <p>{{ stream.status }}</p>
+          <h1>{{ stream.channel.name }}</h1>
+          <p>{{ stream.channel.status }}</p>
           <p>&nbsp;</p>
           <p>Viewers: {{ stream.viewers }}</p>
         </div>

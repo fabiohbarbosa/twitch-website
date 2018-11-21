@@ -1,6 +1,7 @@
 <template>
   <section>
-    <div class="content">
+    <div v-if="stream" class="content">
+
       <iframe
         :src="stream.url"
         frameborder="0"
@@ -11,12 +12,12 @@
 
       <div v-if="stream.channel" class="channel">
         <div class="channel-item">
-          <img :src="stream.logo">
+          <img :src="stream.channel.logo">
         </div>
 
         <div class="channel-info">
           <div class="channel-item">
-            <h1>{{ stream.channel }}</h1>
+            <h1>{{ stream.channel.name }}</h1>
           </div>
           <div class="channel-item">
             <p>Viewers: {{ stream.viewers }}</p>
