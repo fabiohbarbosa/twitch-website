@@ -6,9 +6,9 @@
       </div>
 
       <div class="dropdown-content-title-item">
-        <select v-on:change="updateSearch" v-model="iSearchLimit">
+        <select v-model="iSearchLimit" @change="updateSearch">
           <option v-for="i in incrementalSearch" :key="i">
-            {{i}}
+            {{ i }}
           </option>
         </select>
       </div>
@@ -51,13 +51,13 @@ export default {
       required: true
     }
   },
-  data() {
+  data () {
     return {
       iSearchLimit: 5,
       incrementalSearch: [
         5, 15, 30, 50, 75, 100
       ]
-    }
+    };
   },
 
   computed: {
