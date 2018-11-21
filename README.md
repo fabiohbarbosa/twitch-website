@@ -41,3 +41,6 @@ Change your node version to a project current node version.
 - GOOGLE_AUTH: Google Cloud service account to deploy service in the Kubernetes.
 
 *All variables are configured in CircleCi `twitch-envs` context to shared accross all projects.*
+
+## CI latest report
+![Latest Report](https://lh6.googleusercontent.com/3vA6NJbijLZvHAibq5bAgTURQ8fKwOHsk4t-Y64K8f-D2fOAQIOOBCShatwpXPhmUssWbbkgf4SBQL2ZtnWL=w2880-h1462-rw)
