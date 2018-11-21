@@ -29,7 +29,7 @@ COPY --from=builder ${WORKDIR}/dist/ dist/
 COPY server.js .
 
 # take care to keep the same package version specified in package.json
-RUN npm i express@^4.16.4
+RUN npm i express@^4.16.4 helmet@^3.15.0
 
 EXPOSE 3000
 CMD ["node", "server.js"]
