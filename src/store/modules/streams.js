@@ -26,7 +26,7 @@ export default {
 
     getByChannelName ({ commit }, channel) {
       axios
-        .get(`/streams/${channel}`)
+        .get(`/stream/channel/${channel}`)
         .then(r => r.data)
         .then(stream => {
           commit('setStream', stream);
@@ -44,7 +44,7 @@ export default {
       commit('setStreamGame', game);
 
       axios
-        .get(`/streams?game=${game}&limit=${limit}`)
+        .get(`/stream/game/${game}?limit=${limit}`)
         .then(r => r.data)
         .then(streams => {
           commit('setStreams', streams.data);
