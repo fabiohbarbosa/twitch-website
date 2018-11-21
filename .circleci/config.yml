@@ -147,25 +147,25 @@ jobs:
   test_e2e:
     docker:
       - image: cypress/browsers:chrome69
-
+    environment:
+      PROJECT_DIR: twitch-e2e-test
     steps:
       - run:
           name: Clone twitch-e2e-test
           command: |
             git clone https://fabiohbarbosa:${GITHUB_TOKEN}@github.com/fabiohbarbosa/twitch-e2e-test.git
-            cd twitch-e2e-test
+            cd ${PROJECT_DIR}
 
       - run:
           name: Install project dependencies
           command: |
-            cd twitch-e2e-test
+            cd ${PROJECT_DIR}
             npm i
 
       - run:
           name: Run e2e test
           command: |
-            cd twitch-e2e-test
-            ls -la
+            cd ${PROJECT_DIR}
             npm run cy:run:record
 
   deploy:
