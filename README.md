@@ -2,7 +2,7 @@ Twitch Website
 =====================
 
 ## Links:
-- [CI/CD](https://circleci.com/gh/fabiohbarbosa/twitch-website)
+- [CI/CD](https://circleci.com/gh/fabiohbarbosa/workflows/twitch-website)
 - [Kubernetes Healthcheck](http://35.244.227.171/website/healthcheck)
 - [Demo URL](http://35.244.227.171)
 - [E2E Tests Report](https://dashboard.cypress.io/#/projects/3zzwmr/runs)
@@ -43,4 +43,4 @@ Change your node version to a project current node version.
 *All variables are configured in CircleCi `twitch-envs` context to shared accross all projects.*
 
 ## CI latest report
-![Latest Report](https://lh6.googleusercontent.com/3vA6NJbijLZvHAibq5bAgTURQ8fKwOHsk4t-Y64K8f-D2fOAQIOOBCShatwpXPhmUssWbbkgf4SBQL2ZtnWL=w2880-h1462-rw)
+[Latest Report](https://drive.google.com/open?id=10Moud3DXCzjaffxW6YITXZv81gIN2Yjs)
